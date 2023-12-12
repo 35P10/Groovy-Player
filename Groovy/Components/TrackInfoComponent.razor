@@ -1,0 +1,20 @@
+﻿@using Core.Models;
+@using Groovy.Services;
+@inject IJSRuntime JSRuntime
+@inject AudioPlayerService AudioPlayerService
+
+<div>
+    <button @onclick="() => SeleccionarAudio(Track.Url)">Select</button>
+    <p>@Track.Nombre</p>
+</div>
+
+@code {
+    [Parameter] public Audio Track { get; set; }
+
+    private async Task SeleccionarAudio(string audioUrl)
+    {
+        AudioPlayerService.AudioUrl = audioUrl;
+        string script = $"var audio = document.getElementById('audioPlayer'); audio.src = '{audioUrl}'; audio.play();";
+        await JSRuntime.InvokeVoidAsync("eval", script);
+    }
+}

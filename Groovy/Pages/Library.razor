@@ -1,0 +1,19 @@
+﻿@page "/"
+@using Core.Models;
+@using Groovy.Components;
+
+<h3>Reproductor de Audio</h3>
+
+@foreach (var audio in listaAudios)
+{
+    <TrackInfoComponent Track="@audio" />
+    <hr>
+}
+
+@code {
+    private List<Audio> listaAudios = new List<Audio>
+    {
+        new Audio { Url = "https://upload.wikimedia.org/wikipedia/commons/5/5e/Debussy_-_Pour_les_accords.flac" },
+        new Audio { Url = "https://samplelib.com/lib/preview/mp3/sample-12s.mp3" },
+    };
+}
