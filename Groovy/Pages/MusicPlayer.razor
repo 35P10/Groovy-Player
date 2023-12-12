@@ -1,0 +1,20 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+
+<h3>Reproductor de Audio</h3>
+
+<audio id="audioPlayer" controls style="width: 100%;">
+    Tu navegador no soporta la etiqueta de audio.
+</audio>
+
+<button @onclick="ReproducirAudio">Reproducir Audio</button>
+
+@code {
+    private string url = "https://upload.wikimedia.org/wikipedia/commons/5/5e/Debussy_-_Pour_les_accords.flac"; // Reemplaza esto con la URL real de tu archivo MP3
+
+    private async Task ReproducirAudio()
+    {
+        string script = $"var audio = document.getElementById('audioPlayer'); audio.src = '{url}'; audio.play();";
+        await JSRuntime.InvokeVoidAsync("eval", script);
+    }
+}
