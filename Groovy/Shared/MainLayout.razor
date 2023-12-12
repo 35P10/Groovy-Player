@@ -1,4 +1,6 @@
-﻿@inherits LayoutComponentBase
+﻿@using Groovy.Services
+@inherits LayoutComponentBase
+@inject AudioPlayerService AudioPlayerService
 
 <div class="page">
     <div class="sidebar">
@@ -7,6 +9,7 @@
 
     <main>
         <div class="top-row px-4">
+            <AudioPlayer AudioUrl="@AudioPlayerService.AudioUrl" />
             <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
         </div>
 

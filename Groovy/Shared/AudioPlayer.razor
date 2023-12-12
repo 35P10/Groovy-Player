@@ -1,0 +1,27 @@
+﻿@using Groovy.Services
+@inject AudioPlayerService AudioPlayerService
+
+<audio id="audioPlayer" controls style="width: 100%;">
+    <source src="@AudioUrl" type="audio/mp3" />
+    Tu navegador no soporta la etiqueta de audio.
+</audio>
+
+@code {
+    [Parameter] public string AudioUrl { get; set; }
+
+    protected override void OnInitialized()
+    {
+        AudioPlayerService.OnAudioUrlChanged += ActualizarAudioUrl;
+    }
+
+    private void ActualizarAudioUrl(string nuevoAudioUrl)
+    {
+        AudioUrl = nuevoAudioUrl;
+        StateHasChanged();
+    }
+
+    private void DisposeEvent()
+    {
+        AudioPlayerService.OnAudioUrlChanged -= ActualizarAudioUrl;
+    }
+}
