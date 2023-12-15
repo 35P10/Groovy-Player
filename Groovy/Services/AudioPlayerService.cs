@@ -15,14 +15,25 @@ namespace Groovy.Services
             audioPlayer = new AudioPlayer();
             audioPlayer.OnAudioStateChanged += () => OnAudioStateChanged?.Invoke();
 
-            SetDefaultAudioUrl();
+            SetDefaultAudioUrlAsync();
         }
 
-        private void SetDefaultAudioUrl()
+        private async Task SetDefaultAudioUrlAsync()
         {
-            string defaultAudioUrl = "D:\\Projects\\Groovy\\Groovy\\Resources\\Tracks\\track1.flac";
-            string absolutePath = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, defaultAudioUrl);
-            AudioUrl = absolutePath;
+            string filename = "track1.flac";
+            Stream inputStream = await FileSystem.Current.OpenAppPackageFileAsync(filename);
+
+            string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, filename);
+
+            await Task.Run(async () =>
+            {
+                using (FileStream outputStream = File.Create(targetFile))
+                {
+                    await inputStream.CopyToAsync(outputStream);
+                }
+            });
+
+            AudioUrl = targetFile;
         }
 
         public string AudioUrl
