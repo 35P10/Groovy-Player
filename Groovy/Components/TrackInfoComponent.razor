@@ -11,10 +11,8 @@
 @code {
     [Parameter] public Audio Track { get; set; }
 
-    private async Task SeleccionarAudio(string audioUrl)
+    private void SeleccionarAudio(string audioUrl)
     {
         AudioPlayerService.AudioUrl = audioUrl;
-        string script = $"var audio = document.getElementById('audioPlayer'); audio.src = '{audioUrl}'; audio.play();";
-        await JSRuntime.InvokeVoidAsync("eval", script);
     }
-}w
+}
