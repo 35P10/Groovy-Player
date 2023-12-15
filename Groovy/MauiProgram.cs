@@ -25,7 +25,7 @@ namespace Groovy
 
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddScoped<JavaScriptInterop>();
-            builder.Services.AddScoped<AudioPlayerService>();
+            builder.Services.AddSingleton<AudioPlayerService>();
 
             return builder.Build();
         }
