@@ -1,19 +1,36 @@
 ﻿@using Groovy.Services
 @inject AudioPlayerService AudioPlayerService
 
-<h3>Audio Player Bar</h3>
-<p>@AudioPlayerService.AudioUrl</p>
+<h3>On Playing</h3>
+
+<button @onclick="ToggleDisplay">Menos</button>
+
+<p>Ignorar este campo, es para debug. @AudioPlayerService.AudioUrl</p>
+<p>Nombre de la cancion, puede que sea largo</p>
+<p>Artista</p>
+
+<img 
+    class="w-10 p-3"
+    src="https://images.squarespace-cdn.com/content/v1/5a0dd6831f318dcf5130a0d5/1576103195779-29D5AYRBXRINS7ALNSF4/images+%286%29.jpeg"
+    alt="Imagen del album"
+>
+
 <p>Current Position: @AudioPlayerService.CurrentPosition</p>
 <p>Total Duration: @AudioPlayerService.TotalDuration</p>
-
-<button @onclick="Play">Play</button>
-<button @onclick="Pause">Pause</button>
-<button @onclick="Stop">Stop</button>
 
 <input type="range" min="0" max="@AudioPlayerService.TotalDuration.TotalSeconds"
        value="@AudioPlayerService.CurrentPosition.TotalSeconds" @oninput="SeekToPosition" />
 
+<button>Anterior</button>
+<button @onclick="Play">Play</button>
+<button @onclick="Pause">Pause</button>
+<button>Siguiente</button>
+
+
 @code {
+    [Parameter]
+    public Action ToggleDisplay { get; set; }
+
     private void Play()
     {
         AudioPlayerService.Play();

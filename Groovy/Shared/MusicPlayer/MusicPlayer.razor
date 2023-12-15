@@ -1,0 +1,19 @@
+<aside>
+    @if (isMinimized)
+    {
+        <AudioPlayerBar ToggleDisplay="() => ToggleIsMinimized()"/>
+    }
+    else
+    {
+        <OnPlaying ToggleDisplay="() => ToggleIsMinimized()" />
+    }
+</aside>
+
+@code {
+    private bool isMinimized = true;
+
+    private void ToggleIsMinimized()
+    {
+        isMinimized = !isMinimized;
+    }
+}
