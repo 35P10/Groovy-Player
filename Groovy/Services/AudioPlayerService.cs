@@ -25,20 +25,21 @@ namespace Groovy.Services
 
         private async Task SetDefaultAudioUrlAsync()
         {
-            string filename = "track1.flac";
-            Stream inputStream = await FileSystem.Current.OpenAppPackageFileAsync(filename);
+            // string filename = "track1.flac";
+            // Stream inputStream = await FileSystem.Current.OpenAppPackageFileAsync(filename);
 
-            string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, filename);
+            // string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, filename);
 
-            await Task.Run(async () =>
-            {
-                using (FileStream outputStream = File.Create(targetFile))
-                {
-                    await inputStream.CopyToAsync(outputStream);
-                }
-            });
+            // await Task.Run(async () =>
+            // {
+            //     using (FileStream outputStream = File.Create(targetFile))
+            //     {
+            //         await inputStream.CopyToAsync(outputStream);
+            //     }
+            // });
 
-            AudioUrl = targetFile;
+            //AudioUrl = targetFile;
+            AudioUrl = "https://samplelib.com/lib/preview/mp3/sample-12s.mp3";
         }
 
         public string AudioUrl
