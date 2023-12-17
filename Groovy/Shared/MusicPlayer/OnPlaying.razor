@@ -7,7 +7,6 @@
 
 <button @onclick="ToggleDisplay">Menos</button>
 
-<p>Ignorar este campo, es para debug. @AudioPlayerService.Url</p>
 <p>Nombre de la cancion, puede que sea largo</p>
 <p>Artista</p>
 
@@ -52,7 +51,7 @@
     private void SeekToPosition(ChangeEventArgs e)
     {
         double newPosition = Convert.ToDouble(e.Value);
-        AudioPlayerService.SeekTo(TimeSpan.FromSeconds(newPosition));
+        AudioPlayerService.SeekTo(newPosition);
     }
 
     protected override void OnInitialized()

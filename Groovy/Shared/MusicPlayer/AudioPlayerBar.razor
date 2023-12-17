@@ -2,8 +2,8 @@
 @inject IAudioPlayerService AudioPlayerService
 
 <div class="music_player_bar">
-<input type="range" min="0" max="@AudioPlayerService.TotalDuration"
-       value="@AudioPlayerService.CurrentPosition" @oninput="SeekToPosition" />
+    <input type="range" min="0.0" max=@Math.Round(AudioPlayerService.TotalDuration, 0) step="1"
+           value=@Math.Round(AudioPlayerService.CurrentPosition, 0) @oninput="SeekToPosition" />
 
 <div class="track-info">
     <button @onclick="ToggleDisplay">
@@ -13,10 +13,8 @@
         >
     </button>
     <div class="data">
-        @{
-          //<p>Ignorar este campo, es para debug. @AudioPlayerService.AudioUrl</p>
-        }
-        <p>Nombre de la cancion, puede que sea largo</p>
+            <p>@Math.Round(AudioPlayerService.CurrentPosition, 2)</p>
+            <p>@Math.Round(AudioPlayerService.TotalDuration, 2)</p>
         <p>Artista</p>
     </div>
     <div class="audio-control">
@@ -50,7 +48,7 @@
     private void SeekToPosition(ChangeEventArgs e)
     {
         double newPosition = Convert.ToDouble(e.Value);
-        AudioPlayerService.SeekTo(TimeSpan.FromSeconds(newPosition));
+        AudioPlayerService.SeekTo(newPosition);
     }
 
     protected override void OnInitialized()

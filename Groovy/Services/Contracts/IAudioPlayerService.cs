@@ -8,15 +8,15 @@ namespace Groovy.Services.Contracts
 {
     public interface IAudioPlayerService
     {
-        string Url { get; set; }
         double CurrentPosition { get; }
         double TotalDuration { get; }
+        bool IsPlaying { get; }
 
         event Action OnAudioStateChanged;
 
         void Play();
         void Pause();
         void Stop();
-        void SeekTo(TimeSpan newPosition);
+        void SeekTo(double newPosition);
     }
 }
