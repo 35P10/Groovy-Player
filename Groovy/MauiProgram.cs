@@ -1,5 +1,7 @@
 ﻿using Groovy.Data;
 using Groovy.Services;
+using Groovy.Services.Contracts;
+using Groovy.Services.Repository;
 using Microsoft.Extensions.Logging;
 
 namespace Groovy
@@ -22,10 +24,9 @@ namespace Groovy
 		builder.Services.AddBlazorWebViewDeveloperTools();
 		builder.Logging.AddDebug();
 #endif
-
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddScoped<JavaScriptInterop>();
-            builder.Services.AddSingleton<AudioPlayerService>();
+            builder.Services.AddSingleton<IAudioPlayerService, MauiAudioPlayerService>();
 
             return builder.Build();
         }

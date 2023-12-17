@@ -1,7 +1,7 @@
 ﻿@using Core.Models;
-@using Groovy.Services;
+@using Groovy.Services.Contracts;
 @inject IJSRuntime JSRuntime
-@inject AudioPlayerService AudioPlayerService
+@inject IAudioPlayerService AudioPlayerService
 
 <div>
     <button @onclick="() => SeleccionarAudio(Track.Url)">Select</button>
@@ -13,6 +13,6 @@
 
     private void SeleccionarAudio(string audioUrl)
     {
-        AudioPlayerService.AudioUrl = audioUrl;
+        AudioPlayerService.Url = audioUrl;
     }
 }

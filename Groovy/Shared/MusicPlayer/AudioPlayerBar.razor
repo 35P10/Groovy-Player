@@ -1,9 +1,9 @@
-﻿@using Groovy.Services
-@inject AudioPlayerService AudioPlayerService
+﻿@using Groovy.Services.Contracts;
+@inject IAudioPlayerService AudioPlayerService
 
 <div class="music_player_bar">
-<input type="range" min="0" max="@AudioPlayerService.TotalDuration.TotalSeconds"
-       value="@AudioPlayerService.CurrentPosition.TotalSeconds" @oninput="SeekToPosition" />
+<input type="range" min="0" max="@AudioPlayerService.TotalDuration"
+       value="@AudioPlayerService.CurrentPosition" @oninput="SeekToPosition" />
 
 <div class="track-info">
     <button @onclick="ToggleDisplay">
