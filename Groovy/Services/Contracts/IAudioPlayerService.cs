@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,9 @@ namespace Groovy.Services.Contracts
         double CurrentPosition { get; }
         double TotalDuration { get; }
         bool IsPlaying { get; }
+        Audio Audio {  get; }
+
+        void ChangeTrack(Audio newTrack);
 
         event Action OnAudioStateChanged;
 

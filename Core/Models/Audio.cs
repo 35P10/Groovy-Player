@@ -7,6 +7,11 @@ namespace Core.Models
 {
     public class Audio
     {
+        public Audio()
+        {
+            ;
+        }
+
         public Audio(string filePath)
         {
             try
@@ -27,13 +32,13 @@ namespace Core.Models
             }
         }
 
-        public string Path { get; }
-        public string Title { get; }
-        public TimeSpan Duration {  get; }
-        public string Album { get; }
-        public List<string> Artists { get; }
-        public string Genres { get; }
-        public uint Year { get; }
-        public uint Track { get; }
+        public string Path { get; } = "None";
+        public string Title { get; } = "None";
+        public TimeSpan Duration {  get; } = TimeSpan.Zero;
+        public string Album { get; } = "None";
+        public List<string> Artists { get; } = new List<string>();
+        public string Genres { get; } = "None";
+        public uint Year { get; } = uint.MaxValue;
+        public uint Track { get; } = uint.MaxValue;
     }
 }

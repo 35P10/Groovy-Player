@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Models;
+using System.ComponentModel;
 
 namespace Groovy.Services.Repository
 {
@@ -16,10 +18,29 @@ namespace Groovy.Services.Repository
         private TimeSpan _animationProgress;
         private Timer _updateTimer;
         private readonly IDispatcher _dispatcher;
-        public bool IsPlaying { 
+        public bool IsPlaying {
             get {
                 return _audioPlayer.IsPlaying;
             }
+        }
+        public Audio Audio {
+            get
+            {
+                return _audio;
+            }
+        }
+
+        private Audio _audio;
+
+        public void ChangeTrack(Audio newTrack)
+        {
+            Stop();
+            _audio = newTrack;
+            _audioManager = new AudioManager();
+            FileStream fileStream = new FileStream(_audio.Path, FileMode.Open, FileAccess.Read);
+            _audioPlayer = _audioManager.CreatePlayer(fileStream);
+
+            UpdateAudioPosition();
         }
 
         public event Action OnAudioStateChanged;
@@ -37,6 +58,7 @@ namespace Groovy.Services.Repository
 
         public MauiAudioPlayerService(IDispatcher dispatcher)
         {
+            _audio = new Audio();
             _dispatcher = dispatcher;
             MauiAudioPlayerServiceAsync();
         }
@@ -49,7 +71,6 @@ namespace Groovy.Services.Repository
                 {
                     _audioManager = new AudioManager();
                     _audioPlayer = _audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("track1.flac"));
-
                     UpdateAudioPosition();
                 });
             }
