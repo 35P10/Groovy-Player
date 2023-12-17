@@ -16,7 +16,11 @@ namespace Groovy.Services.Repository
         private TimeSpan _animationProgress;
         private Timer _updateTimer;
         private readonly IDispatcher _dispatcher;
-        public bool IsPlaying { get; set; }
+        public bool IsPlaying { 
+            get {
+                return _audioPlayer.IsPlaying;
+            }
+        }
 
         public event Action OnAudioStateChanged;
 
@@ -71,7 +75,6 @@ namespace Groovy.Services.Repository
         public void Play()
         {
             _audioPlayer.Play();
-            IsPlaying = true;
         }
 
         public void Pause()
@@ -79,12 +82,10 @@ namespace Groovy.Services.Repository
             if (_audioPlayer.IsPlaying)
             {
                 _audioPlayer.Pause();
-                IsPlaying = false;
             }
             else
             {
                 _audioPlayer.Play();
-                IsPlaying = true;
             }
         }
 
@@ -93,7 +94,6 @@ namespace Groovy.Services.Repository
             if (_audioPlayer.IsPlaying)
             {
                 _audioPlayer.Stop();
-                IsPlaying = false;
             }
         }
 

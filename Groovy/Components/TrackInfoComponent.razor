@@ -4,8 +4,13 @@
 @inject IAudioPlayerService AudioPlayerService
 
 <div>
-    <button @onclick="() => SeleccionarAudio(Track.Url)">Select</button>
-    <p>@Track.Nombre</p>
+    <button @onclick="() => SeleccionarAudio(Track.Path)">Select</button>
+    <p>@Track.Title</p>
+    <p>@Track.Track</p>
+    <p>@Track.Album</p>
+    <p>@Track.Year</p>
+    <p>@Track.Genres</p>
+    <p>@Track.Duration</p>
 </div>
 
 @code {

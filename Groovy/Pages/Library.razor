@@ -1,6 +1,8 @@
 ﻿@page "/"
 @using Core.Models;
 @using Groovy.Components;
+@using Groovy.Services.Helpers;
+@inject AudioBuilder AudioBuilder;
 
 <h3>Reproductor de Audio</h3>
 
@@ -11,23 +13,14 @@
 }
 
 @code {
-    private List<Audio> listaAudios = new List<Audio>
+    private Audio audio1;
+    private List<Audio> listaAudios;
+
+    protected override async Task OnInitializedAsync()
     {
-        new Audio { Url = "https://upload.wikimedia.org/wikipedia/commons/5/5e/Debussy_-_Pour_les_accords.flac" },
-        new Audio { Url = "https://samplelib.com/lib/preview/mp3/sample-12s.mp3" },
-         new Audio { Url = "https://upload.wikimedia.org/wikipedia/commons/5/5e/Debussy_-_Pour_les_accords.flac" },
-        new Audio { Url = "https://samplelib.com/lib/preview/mp3/sample-12s.mp3" },
-         new Audio { Url = "https://upload.wikimedia.org/wikipedia/commons/5/5e/Debussy_-_Pour_les_accords.flac" },
-        new Audio { Url = "https://samplelib.com/lib/preview/mp3/sample-12s.mp3" },
-         new Audio { Url = "https://upload.wikimedia.org/wikipedia/commons/5/5e/Debussy_-_Pour_les_accords.flac" },
-        new Audio { Url = "https://samplelib.com/lib/preview/mp3/sample-12s.mp3" },
-         new Audio { Url = "https://upload.wikimedia.org/wikipedia/commons/5/5e/Debussy_-_Pour_les_accords.flac" },
-        new Audio { Url = "https://samplelib.com/lib/preview/mp3/sample-12s.mp3" },
-         new Audio { Url = "https://upload.wikimedia.org/wikipedia/commons/5/5e/Debussy_-_Pour_les_accords.flac" },
-        new Audio { Url = "https://samplelib.com/lib/preview/mp3/sample-12s.mp3" },
-         new Audio { Url = "https://upload.wikimedia.org/wikipedia/commons/5/5e/Debussy_-_Pour_les_accords.flac" },
-        new Audio { Url = "https://samplelib.com/lib/preview/mp3/sample-12s.mp3" },
-         new Audio { Url = "https://upload.wikimedia.org/wikipedia/commons/5/5e/Debussy_-_Pour_les_accords.flac" },
-        new Audio { Url = "https://samplelib.com/lib/preview/mp3/sample-12s.mp3" },
-    };
+        listaAudios = new List<Audio>();
+
+        audio1 = await AudioBuilder.FromBundledToLocalAsync("track2.mp3");
+        listaAudios.Add(audio1);
+    }
 }
