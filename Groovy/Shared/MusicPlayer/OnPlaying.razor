@@ -1,6 +1,8 @@
 ﻿@using Groovy.Services
 @inject AudioPlayerService AudioPlayerService
 
+<div class="music_player_full_size">
+
 <h3>On Playing</h3>
 
 <button @onclick="ToggleDisplay">Menos</button>
@@ -26,6 +28,7 @@
 <button @onclick="Pause">Pause</button>
 <button>Siguiente</button>
 
+</div>
 
 @code {
     [Parameter]

@@ -1,0 +1,9 @@
+.music_player_full_size {
+    background-image: black;
+    width: 100%;
+    height: 80vh;
+    position: sticky;
+    top: 0;
+    overflow: scroll;
+    position: absolute;
+}

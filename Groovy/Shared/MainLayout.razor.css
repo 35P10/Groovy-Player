@@ -2,10 +2,19 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 main {
+    position: relative;
     flex: 1;
+    display: flex;
+    flex-direction:column;
+}
+
+.content {
+    position: relative;
+    overflow-y: scroll;
 }
 
 .sidebar {
