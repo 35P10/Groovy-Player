@@ -1,0 +1,24 @@
+﻿.TrackInfoComponent {
+    display: flex;
+    height: 100px;
+    padding: 8px;
+    gap: 8px;
+
+    img {
+        height: 100%;
+    }
+
+    .track-info {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        p {
+              margin: 0;
+              padding: 0;
+          }
+    }
+}
+
+.pcview {
+    display: none;
+}

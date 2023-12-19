@@ -13,14 +13,23 @@
 }
 
 @code {
-    private Audio audio1;
     private List<Audio> listaAudios;
 
     protected override async Task OnInitializedAsync()
     {
+        List<string> tracksToLoad = new List<String>
+        {
+            "track2.mp3",
+            "track1.flac",
+        };
         listaAudios = new List<Audio>();
 
-        audio1 = await AudioBuilder.FromBundledToLocalAsync("track2.mp3");
-        listaAudios.Add(audio1);
+        foreach(var track in tracksToLoad)
+        {
+            var temp = await AudioBuilder.FromBundledToLocalAsync(track);
+            listaAudios.Add(temp);
+            
+        }
+
     }
 }

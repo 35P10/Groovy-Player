@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using TagLib;
+using TagLib.Flac;
 using TagLib.Matroska;
 
 namespace Core.Models
@@ -24,6 +25,12 @@ namespace Core.Models
                 Genres = tfile.Tag.Genres.ToList().FirstOrDefault();
                 Year = tfile.Tag.Year;
                 Track = tfile.Tag.Track;
+                IPicture Picture = tfile.Tag.Pictures.ToList().FirstOrDefault();
+                if (Picture != null)
+                {
+                    string base64Image = Convert.ToBase64String(Picture.Data.Data);
+                    Imagen =  $"data:{Picture.MimeType};base64,{base64Image}";
+                }
                 Path = filePath;
             }
             catch (Exception ex)
@@ -40,5 +47,6 @@ namespace Core.Models
         public string Genres { get; } = "None";
         public uint Year { get; } = uint.MaxValue;
         public uint Track { get; } = uint.MaxValue;
+        public string Imagen { get; } = "None";
     }
 }

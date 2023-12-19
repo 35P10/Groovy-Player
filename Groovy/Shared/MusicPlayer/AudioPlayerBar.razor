@@ -8,14 +8,16 @@
 <div class="track-info">
     <button @onclick="ToggleDisplay">
         <img 
-            src="https://images.squarespace-cdn.com/content/v1/5a0dd6831f318dcf5130a0d5/1576103195779-29D5AYRBXRINS7ALNSF4/images+%286%29.jpeg"
+            src=@_albumArt
             alt="Imagen del album"
         >
     </button>
     <div class="data">
-            <p>@Math.Round(AudioPlayerService.CurrentPosition, 2)</p>
-            <p>@Math.Round(AudioPlayerService.TotalDuration, 2)</p>
-        <p>Artista</p>
+        <p>@_title</p>
+        @foreach (var artist in _artists)
+        {
+            <p>@artist</p>
+        }
     </div>
     <div class="audio-control">
         <button @onclick="Play">O</button>
@@ -29,6 +31,10 @@
 @code {
     [Parameter]
     public Action ToggleDisplay { get; set; }
+    private string _title = "None";
+    private List<string> _artists = new List<string>();
+    private double _totalDuration = 0.0;
+    private string _albumArt;
 
     private void Play()
     {
@@ -51,8 +57,18 @@
         AudioPlayerService.SeekTo(newPosition);
     }
 
+    private void updatetrackInfo()
+    {
+        _title = AudioPlayerService.Audio.Title;
+        _artists = AudioPlayerService.Audio.Artists;
+        _totalDuration = AudioPlayerService.TotalDuration;
+        _albumArt = AudioPlayerService.Audio.Imagen;
+        StateHasChanged();
+    }
+
     protected override void OnInitialized()
     {
         AudioPlayerService.OnAudioStateChanged += StateHasChanged;
+        AudioPlayerService.OnAudioChanged += updatetrackInfo;
     }
 }

@@ -17,6 +17,7 @@ namespace Groovy.Services.Contracts
         void ChangeTrack(Audio newTrack);
 
         event Action OnAudioStateChanged;
+        event Action OnAudioChanged;
 
         void Play();
         void Pause();

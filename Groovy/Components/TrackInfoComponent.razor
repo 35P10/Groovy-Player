@@ -3,14 +3,26 @@
 @inject IJSRuntime JSRuntime
 @inject IAudioPlayerService AudioPlayerService
 
-<div>
-    <button @onclick="() => SeleccionarAudio(Track.Path)">Select</button>
+<div class="TrackInfoComponent">
+    <button @onclick="() => SeleccionarAudio(Track.Path)">
+        <img
+            src=@Track.Imagen
+            alt="Album Art"
+        >
+    </button>
+    <div class="track-info">
     <p>@Track.Title</p>
-    <p>@Track.Track</p>
-    <p>@Track.Album</p>
-    <p>@Track.Year</p>
-    <p>@Track.Genres</p>
-    <p>@Track.Duration</p>
+    <p>
+        @foreach (var artist in @Track.Artists)
+        {
+            @artist
+        }
+    </p>
+    <p class="pcview">@Track.Track</p>
+    <p class="pcview">@Track.Duration</p>
+    <p class="pcview">@Track.Year</p>
+    <p class="pcview">@Track.Genres</p>
+    </div>
 </div>
 
 @code {

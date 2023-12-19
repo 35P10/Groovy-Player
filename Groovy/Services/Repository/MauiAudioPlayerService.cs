@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Models;
 using System.ComponentModel;
+using Groovy.Services.Helpers;
 
 namespace Groovy.Services.Repository
 {
@@ -31,6 +32,7 @@ namespace Groovy.Services.Repository
         }
 
         private Audio _audio;
+        private AudioBuilder _audioBuilder;
 
         public void ChangeTrack(Audio newTrack)
         {
@@ -40,10 +42,13 @@ namespace Groovy.Services.Repository
             FileStream fileStream = new FileStream(_audio.Path, FileMode.Open, FileAccess.Read);
             _audioPlayer = _audioManager.CreatePlayer(fileStream);
 
+            OnAudioChanged?.Invoke();
+            Play();
             UpdateAudioPosition();
         }
 
         public event Action OnAudioStateChanged;
+        public event Action OnAudioChanged;
 
         public double TotalDuration => _audioPlayer?.Duration ?? 1;
 
@@ -56,10 +61,11 @@ namespace Groovy.Services.Repository
             }
         }
 
-        public MauiAudioPlayerService(IDispatcher dispatcher)
+        public MauiAudioPlayerService(IDispatcher dispatcher, AudioBuilder AudioBuilder)
         {
             _audio = new Audio();
             _dispatcher = dispatcher;
+            _audioBuilder = AudioBuilder;
             MauiAudioPlayerServiceAsync();
         }
 
@@ -67,12 +73,9 @@ namespace Groovy.Services.Repository
         {
             try
             {
-                await Task.Run(async () =>
-                {
-                    _audioManager = new AudioManager();
-                    _audioPlayer = _audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("track1.flac"));
-                    UpdateAudioPosition();
-                });
+                Audio temp = await _audioBuilder.FromBundledToLocalAsync("track3.m4a");
+                ChangeTrack(temp);
+                Stop();
             }
             catch (Exception ex)
             {
@@ -112,7 +115,7 @@ namespace Groovy.Services.Repository
 
         public void Stop()
         {
-            if (_audioPlayer.IsPlaying)
+            if (_audioPlayer != null)
             {
                 _audioPlayer.Stop();
             }
