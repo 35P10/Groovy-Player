@@ -1,21 +1,41 @@
 ﻿.TrackInfoComponent {
     display: flex;
-    height: 100px;
     padding: 8px;
     gap: 8px;
+    flex-direction: row;
+
+    .TrackInfoButton
+    {
+        border: none;
+        background-color: transparent;
+        margin: 0;
+        padding: 0;
+        flex: 1;
+        height: 100px;
+        display: flex;
+        gap: 8px;
+        flex-direction: row;
+        img {
+                display:block;
+                width: 100px;
+           }
+    }
 
     img {
-        height: 100%;
+        height: 100%
     }
 
     .track-info {
         display: flex;
         flex-direction: column;
         flex: 1;
-        p {
-              margin: 0;
-              padding: 0;
-          }
+        text-align: left;
+        p
+        {
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
     }
 }
 

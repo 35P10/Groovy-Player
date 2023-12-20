@@ -1,0 +1,22 @@
+﻿@using Groovy.Services.Contracts;
+@using Microsoft.Maui.Controls;
+@inject IAudioPlayerService AudioPlayerService
+
+<button @onclick="TogglePlay" class="custom-button">
+    @if (AudioPlayerService.IsPlaying)
+    {
+        <img src="Icons/play-52.png" alt="Image" />
+    }
+    else
+    {
+        <img src="Icons/stop-52.png" alt="Image" />
+    }
+</button>
+
+@code {
+    private void TogglePlay()
+    {
+        AudioPlayerService.Pause();
+        StateHasChanged();
+    }
+}

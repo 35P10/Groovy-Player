@@ -21,7 +21,9 @@ namespace Groovy.Services.Repository
         private readonly IDispatcher _dispatcher;
         public bool IsPlaying {
             get {
-                return _audioPlayer.IsPlaying;
+                if(_audioManager != null )
+                    return _audioPlayer.IsPlaying;
+                else return false;
             }
         }
         public Audio Audio {

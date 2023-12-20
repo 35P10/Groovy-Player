@@ -1,8 +1,13 @@
 ﻿@using Groovy.Services.Contracts;
 @inject IAudioPlayerService AudioPlayerService
+@using Groovy.Components.Buttons
+
 
 <div class="music_player_bar">
-    <input type="range" min="0.0" max=@Math.Round(AudioPlayerService.TotalDuration, 0) step="1"
+    <div class="musicProgress">
+        <div style="width:@progresPercent"></div>
+    </div>
+    <input hidden type="range" min="0.0" max=@Math.Round(AudioPlayerService.TotalDuration, 0) step="1"
            value=@Math.Round(AudioPlayerService.CurrentPosition, 0) @oninput="SeekToPosition" />
 
 <div class="track-info">
@@ -20,9 +25,8 @@
         }
     </div>
     <div class="audio-control">
-        <button @onclick="Play">O</button>
-        <button @onclick="Pause">X</button>
-        <button>></button>
+        <TogglePlayButton />
+        <NextButton />
     </div>
 </div>
 
@@ -35,7 +39,7 @@
     private List<string> _artists = new List<string>();
     private double _totalDuration = 0.0;
     private string _albumArt;
-
+    private string progresPercent = "0%";
     private void Play()
     {
         AudioPlayerService.Play();
@@ -66,9 +70,21 @@
         StateHasChanged();
     }
 
+    private void updateAudioProgres()
+    {
+        double temp = @Math.Round(AudioPlayerService.CurrentPosition / AudioPlayerService.TotalDuration, 2);
+        double x = @Math.Round(temp * 100, 0);
+        if (x > 100)
+        {
+            x = 100;
+        }
+        progresPercent = $"{x}%";
+        StateHasChanged();
+    }
+
     protected override void OnInitialized()
     {
-        AudioPlayerService.OnAudioStateChanged += StateHasChanged;
+        AudioPlayerService.OnAudioStateChanged += updateAudioProgres;
         AudioPlayerService.OnAudioChanged += updatetrackInfo;
     }
 }

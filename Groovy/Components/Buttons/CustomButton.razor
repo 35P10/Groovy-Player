@@ -1,0 +1,16 @@
+﻿<button 
+    class="custom-button"
+    @onclick="OnClick">
+        <img    
+            src="@ImageUrl" 
+            alt="Button Image"
+         />
+</button>
+
+@code {
+    [Parameter]
+    public string ImageUrl { get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+}
