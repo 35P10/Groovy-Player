@@ -1,14 +1,13 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
     <main>
+        <div class="sidebar">
+            <NavMenu />
+        </div>
         <article class="content">
             @Body
         </article>
-        <Groovy.Shared.MusicPlayer.MusicPlayer />
     </main>
+    <Groovy.Shared.MusicPlayer.MusicPlayer />
 </div>

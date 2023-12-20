@@ -4,12 +4,9 @@
 @using Groovy.Services.Helpers;
 @inject AudioBuilder AudioBuilder;
 
-<h3>Reproductor de Audio</h3>
-
 @foreach (var audio in listaAudios)
 {
     <TrackInfoComponent Track="@audio" />
-    <hr>
 }
 
 @code {
