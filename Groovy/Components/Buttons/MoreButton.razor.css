@@ -1,0 +1,16 @@
+﻿.custom-button {
+    height: 40px;
+    padding: 8px;
+    aspect-ratio: 1/1;
+    cursor: none;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+
+    img
+    {
+        height:100%;
+        display: block;
+        aspect-ratio: 1/1;
+    }
+}

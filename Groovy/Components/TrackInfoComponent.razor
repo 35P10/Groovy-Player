@@ -1,5 +1,6 @@
 ﻿@using Core.Models;
 @using Groovy.Services.Contracts;
+@using Groovy.Components.Buttons;
 @inject IJSRuntime JSRuntime
 @inject IAudioPlayerService AudioPlayerService
 
@@ -26,9 +27,7 @@
             <p class="pcview">@Track.Genres</p>
         </div>
     </button>
-    <button class="TrackActionsButton">
-        ...
-    </button>
+    <MoreButton />
 </div>
 
 @code {

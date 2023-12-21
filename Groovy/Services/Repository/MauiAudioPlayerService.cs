@@ -75,7 +75,7 @@ namespace Groovy.Services.Repository
         {
             try
             {
-                Audio temp = await _audioBuilder.FromBundledToLocalAsync("track3.m4a");
+                Audio temp = await _audioBuilder.FromBundledToLocalAsync("track2.mp3");
                 ChangeTrack(temp);
                 Stop();
             }

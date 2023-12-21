@@ -16,17 +16,24 @@
     {
         List<string> tracksToLoad = new List<String>
         {
-            "track2.mp3",
             "track1.flac",
+            "track3.m4a",
+            "track4.flac",
+            "track5.mp3",
         };
         listaAudios = new List<Audio>();
 
-        foreach(var track in tracksToLoad)
+        foreach (var track in tracksToLoad)
         {
             var temp = await AudioBuilder.FromBundledToLocalAsync(track);
             listaAudios.Add(temp);
-            
+
         }
 
+    }
+
+    public void Dispose()
+    {
+        listaAudios.Clear();
     }
 }
