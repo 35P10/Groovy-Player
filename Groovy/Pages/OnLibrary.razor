@@ -1,0 +1,34 @@
+﻿@page "/"
+@using Core.Models;
+@using Core.Services;
+@using Groovy.Components;
+@using Groovy.Services.Helpers;
+@inject AudioBuilder AudioBuilder;
+@inject Library Library;
+
+@foreach (var audio in Library.allTracks)
+{
+    <TrackInfoComponent Track="@audio" />
+}
+
+@code {
+    List<string> tracksToLoad = new List<String>
+    {
+        "track1.flac",
+        "track3.m4a",
+        "track4.flac",
+        "track5.mp3",
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Library.allTracks.Count == 0)
+        {
+            foreach (var track in tracksToLoad)
+            {
+                var temp = await AudioBuilder.FromBundledToLocalAsync(track);
+                Library.AddTrack(temp);
+            }
+        }
+    }
+}

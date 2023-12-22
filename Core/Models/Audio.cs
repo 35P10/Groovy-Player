@@ -6,7 +6,7 @@ using TagLib.Matroska;
 
 namespace Core.Models
 {
-    public class Audio
+    public class Audio : IComparable<Audio>
     {
         public Audio()
         {
@@ -48,5 +48,10 @@ namespace Core.Models
         public uint Year { get; } = uint.MaxValue;
         public uint Track { get; } = uint.MaxValue;
         public string Imagen { get; } = "None";
+
+        public int CompareTo(Audio other)
+        {
+            return string.Compare(this.Title, other.Title, StringComparison.Ordinal);
+        }
     }
 }
