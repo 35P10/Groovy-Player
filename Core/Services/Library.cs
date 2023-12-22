@@ -9,13 +9,17 @@ namespace Core.Services
 {
     public class Library
     {
-        public SortedSet<Audio> allTracks { get; } = new SortedSet<Audio>();
+        public SortedDictionary<int, Audio> AllTracks { get; } = new SortedDictionary<int, Audio>();
+        public SortedSet<AudioMinRepresentation> SortedTracks = new SortedSet<AudioMinRepresentation>();
 
         public Library() { }
 
         public void AddTrack(Audio track)
         {
-            allTracks.Add(track);
+            var temp = new AudioMinRepresentation(track.Title, AllTracks.Count + 1);
+            track.Id = temp.Id;
+            SortedTracks.Add(temp);
+            AllTracks.Add(temp.Id, track);
         }
     }
 }

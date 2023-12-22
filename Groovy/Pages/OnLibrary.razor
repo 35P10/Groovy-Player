@@ -6,9 +6,9 @@
 @inject AudioBuilder AudioBuilder;
 @inject Library Library;
 
-@foreach (var audio in Library.allTracks)
+@foreach (var audio in Library.SortedTracks)
 {
-    <TrackInfoComponent Track="@audio" />
+    <TrackInfoComponent Track="@Library.AllTracks[audio.Id]" />
 }
 
 @code {
@@ -22,7 +22,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if (Library.allTracks.Count == 0)
+        if (Library.AllTracks.Count == 0)
         {
             foreach (var track in tracksToLoad)
             {
