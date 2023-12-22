@@ -6,10 +6,12 @@
 @inject AudioBuilder AudioBuilder;
 @inject Library Library;
 
-@foreach (var audio in Library.SortedTracks)
-{
-    <TrackInfoComponent Track="@Library.AllTracks[audio.Id]" />
-}
+<div class="content">
+    @foreach (var audio in Library.SortedTracks)
+    {
+        <TrackInfoComponent Track="@Library.AllTracks[audio.Id]" />
+    }
+</div>
 
 @code {
     List<string> tracksToLoad = new List<String>

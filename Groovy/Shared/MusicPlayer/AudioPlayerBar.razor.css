@@ -1,4 +1,4 @@
-.music_player_bar {
+﻿.music_player_bar {
     background-color: #0A0A0A;
     height: fit-content;
     bottom: 0;
@@ -54,9 +54,27 @@
     font-size: small;
     flex: 1;
     height: 100%;
-
-    p {
-          margin: 0;
-          padding: 0;
-      }
+    overflow:hidden;
 }
+
+    .data p {
+        white-space: nowrap;
+        margin: 0;
+        padding: 0;
+        width: fit-content;
+    }
+
+@keyframes my-animation {
+    from {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+
+    to {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+}
+

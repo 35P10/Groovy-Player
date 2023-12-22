@@ -19,10 +19,12 @@
     </button>
     <div class="data">
         <p>@_title</p>
+            <p>
         @foreach (var artist in _artists)
         {
-            <p>@artist</p>
+            @artist
         }
+         </p>
     </div>
     <div class="audio-control">
         <TogglePlayButton />
