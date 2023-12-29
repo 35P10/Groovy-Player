@@ -17,6 +17,11 @@ namespace Groovy
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddSingleton<AudioBuilder>();
+#if WINDOWS
+            services.AddSingleton<INotificationHelper, WindowsNotificationHelper>();
+#else
+            services.AddScoped<INotificationHelper, AndroidNotificationHelper>();
+#endif
             services.AddSingleton<IAudioPlayerService, MauiAudioPlayerService>();
             services.AddSingleton<WeatherForecastService>();
             services.AddScoped<JavaScriptInterop>();

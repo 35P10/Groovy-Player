@@ -14,6 +14,7 @@ namespace Groovy.Services.Repository
 {
     public class MauiAudioPlayerService : IAudioPlayerService
     {
+        private readonly INotificationHelper _notificationHelper;
         private IAudioManager _audioManager;
         private IAudioPlayer _audioPlayer;
         private TimeSpan _animationProgress;
@@ -46,6 +47,7 @@ namespace Groovy.Services.Repository
 
             OnAudioChanged?.Invoke();
             Play();
+            _notificationHelper.ShowNotification(_audio.Title, _audio.Album);
             UpdateAudioPosition();
         }
 
@@ -63,11 +65,12 @@ namespace Groovy.Services.Repository
             }
         }
 
-        public MauiAudioPlayerService(IDispatcher dispatcher, AudioBuilder AudioBuilder)
+        public MauiAudioPlayerService(IDispatcher dispatcher, AudioBuilder AudioBuilder, INotificationHelper notificationHelper)
         {
             _audio = new Audio();
             _dispatcher = dispatcher;
             _audioBuilder = AudioBuilder;
+            _notificationHelper = notificationHelper;
             MauiAudioPlayerServiceAsync();
         }
 
